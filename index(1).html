@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>沖田総悟 アーカイブ ♡</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="アーカイブ">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fdeef3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1217" media="(prefers-color-scheme: dark)">
+<style>
+/* Layout: a tight masonry wall of small thumbnails; text entries sit in the wall as squares; everything opens in one focused viewer */
+:root{
+  --bg:#fdeef3; --dot:#f9dbe5;
+  --glass-top:rgba(255,255,255,.95); --glass-bot:rgba(255,236,243,.75); --glass-edge:#f1c6d5; --gloss:rgba(255,255,255,.9);
+  --aero-hi:#ffb3cf; --aero-mid:#ec5a8d; --aero-lo:#cf3a70; --aero-edge:#c43066; --aero-glow:rgba(255,190,215,.75); --aero-shadow:rgba(224,69,123,.35); --surface:#ffffff; --ink:#3a2a30; --muted:#a07c88; --line:#f2d3dd; --tile:#f8dfe7;
+  --accent:#e0457b; --accent-ink:#ffffff; --scrim:rgba(40,20,28,.86); --on-scrim:#fff2f6;
+  /* the same system sans stack Xiaohongshu uses on desktop: PingFang on Mac, YaHei on Windows */
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --display:var(--sans); --body:var(--sans); --mono:var(--sans);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1b1217; --dot:#251820;
+    --glass-top:rgba(255,255,255,.16); --glass-bot:rgba(255,255,255,.04); --glass-edge:rgba(255,200,220,.22); --gloss:rgba(255,255,255,.35);
+    --aero-hi:#ff9fc2; --aero-mid:#e2507f; --aero-lo:#b02c5c; --aero-edge:#ff8db6; --aero-glow:rgba(255,160,200,.45); --aero-shadow:rgba(0,0,0,.45); --surface:#251920; --ink:#f6e6ec; --muted:#b08d9a; --line:#3a2730; --tile:#2c1e25;
+    --accent:#ff7aa8; --accent-ink:#2a0d18; --scrim:rgba(12,6,9,.92); --on-scrim:#fff2f6; color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
+body{
+  margin:0; background-color:var(--bg); color:var(--ink);
+  background-image:radial-gradient(var(--dot) 1.1px, transparent 1.5px), radial-gradient(var(--dot) 1.1px, transparent 1.5px);
+  background-size:14px 14px; background-position:0 0, 7px 7px; background-attachment:fixed; font-family:var(--body); font-size:15px; line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0 56px;
+}
+[hidden]{display:none!important}
+img{max-width:100%}
+.wrap{max-width:1320px; margin:0 auto}
+button,input,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+header{display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:12px; row-gap:4px; align-items:center; padding-block:22px 0}
+.meta{display:flex; align-items:center; gap:10px; justify-self:end; white-space:nowrap}
+.title-row{display:flex; align-items:center; gap:10px; min-width:0}
+#add-btn{flex:none; font-size:12px; padding:3px 11px}
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--muted); margin:0}
+.eyebrow b{color:var(--accent); font-weight:600; letter-spacing:.04em; font-size:13px}
+.heart{color:var(--accent); font-weight:400}
+h1.eyebrow{font-weight:400; line-height:1.4}
+.count{font-family:var(--mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.linkish{background:none; border:0; padding:0; font-family:var(--mono); font-size:12px; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:3px}
+.linkish:hover{color:var(--ink)}
+
+.btn{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:7px 14px; font-size:14px; font-weight:500; cursor:pointer; transition:border-color .15s, background .15s}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{position:relative; isolation:isolate; overflow:hidden; color:#fff; border:1px solid var(--aero-edge); text-shadow:0 1px 1px rgba(110,15,50,.45);
+  background:linear-gradient(180deg, var(--aero-hi) 0%, var(--aero-mid) 52%, var(--aero-lo) 100%);
+  box-shadow:0 2px 7px var(--aero-shadow), inset 0 -4px 7px var(--aero-glow), inset 0 1px 0 rgba(255,255,255,.55)}
+.btn.primary::before{content:""; position:absolute; z-index:-1; left:7%; right:7%; top:1px; height:50%; border-radius:999px; background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.08))}
+.btn.primary:hover{filter:brightness(1.05); border-color:var(--aero-edge)}
+.btn.primary:active{transform:translateY(1px)}
+.btn.danger{color:var(--accent); border-color:var(--accent)}
+.btn.small{padding:5px 11px; font-size:13px}
+.btn:disabled{opacity:.55; cursor:default}
+
+.bar{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding-block:7px 16px}
+.chips{display:flex; gap:6px; flex-wrap:wrap}
+.chip{position:relative; isolation:isolate; overflow:hidden; font-family:var(--mono); font-size:12.5px; font-weight:500; padding:5px 15px 6px; border-radius:999px; cursor:pointer; color:var(--ink);
+  border:1px solid var(--glass-edge); background:linear-gradient(180deg, var(--glass-top), var(--glass-bot));
+  box-shadow:0 1px 3px var(--aero-shadow), inset 0 -2px 5px var(--glass-top); transition:transform .12s, box-shadow .15s}
+.chip::before{content:""; position:absolute; z-index:-1; left:7%; right:7%; top:1px; height:50%; border-radius:999px; background:linear-gradient(180deg, var(--gloss), transparent)}
+.chip:hover{box-shadow:0 2px 7px var(--aero-shadow), inset 0 -2px 5px var(--glass-top)}
+.chip:active{transform:translateY(1px)}
+.chip span{font-variant-numeric:tabular-nums; opacity:.65; margin-left:4px}
+.chip[aria-pressed="true"]{color:#fff; border-color:var(--aero-edge); text-shadow:0 1px 1px rgba(110,15,50,.45);
+  background:linear-gradient(180deg, var(--aero-hi) 0%, var(--aero-mid) 52%, var(--aero-lo) 100%);
+  box-shadow:0 2px 7px var(--aero-shadow), inset 0 -4px 7px var(--aero-glow), inset 0 1px 0 rgba(255,255,255,.55)}
+.chip[aria-pressed="true"]::before{background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.08))}
+.chip[aria-pressed="true"] span{opacity:.85}
+.chip .lock{display:inline-block; width:10px; height:11px; margin-left:5px; vertical-align:-1px; opacity:.8}
+.chip.heart-chip{color:var(--accent)}
+.chip.heart-chip[aria-pressed="true"]{color:#fff}
+.bar-right{display:flex; align-items:center; gap:14px}
+.cats{display:flex; gap:6px; flex-wrap:wrap; padding:2px 0 4px}
+.cats .chip{font-size:12px; padding:4px 12px 5px}
+.check{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink); cursor:pointer}
+.check input{width:16px; height:16px; margin:0; accent-color:var(--accent)}
+.warn{margin:0; font-size:13px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:10px 12px}
+.hint{font-size:12px; color:var(--muted); margin:0}
+.search{width:190px; max-width:100%; border:1px solid var(--glass-edge); border-radius:999px; padding:6px 14px; font-size:13px; color:var(--ink);
+  background:linear-gradient(180deg, var(--glass-top), var(--glass-bot)); box-shadow:inset 0 1px 3px var(--aero-shadow)}
+.search::placeholder{color:var(--muted)}
+.tags{display:flex; gap:6px; flex-wrap:wrap}
+.tag{font-size:12.5px; padding:3px 11px; border-radius:999px; border:1px solid var(--line); background:var(--bg); color:var(--accent); cursor:pointer; white-space:nowrap}
+.tag:hover{border-color:var(--accent)}
+#tagpill{background:var(--surface); border-color:var(--accent)}
+.tile.post{cursor:pointer}
+.p-cap{position:absolute; left:0; right:0; bottom:0; padding:28px 9px 8px; display:flex; flex-direction:column; gap:2px; text-align:left; color:#fff;
+  background:linear-gradient(to bottom, transparent, rgba(45,12,28,.78))}
+.p-kind{font-size:9.5px; letter-spacing:.08em; opacity:.85}
+.p-title{font-size:12.5px; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.v-panel.is-post{width:min(720px, 100%)}
+.post-body{display:flex; flex-direction:column; gap:16px; white-space:normal}
+.post-body p{margin:0; white-space:pre-wrap}
+.post-body img{display:block; width:100%; height:auto; border-radius:8px; background:var(--tile)}
+#c-blocks{display:flex; flex-direction:column; gap:8px}
+.field .pb-text{width:100%; border:1px solid var(--line); background:var(--bg); border-radius:7px; padding:9px 11px; font-size:15px; line-height:1.6; resize:none; overflow:hidden; min-height:60px}
+.pb-img{position:relative; border-radius:8px; overflow:hidden; background:var(--tile)}
+.pb-img img{display:block; width:100%; max-height:240px; object-fit:contain}
+.pb-x{position:absolute; top:6px; right:6px; width:28px; height:28px; border-radius:999px; border:0; background:rgba(45,12,28,.6); color:#fff; font-size:17px; line-height:1; cursor:pointer}
+.pb-add{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px}
+.field label small{font-weight:400}
+.hint kbd{font-family:var(--mono); font-size:11px; border:1px solid var(--line); border-radius:4px; padding:0 4px; background:var(--surface)}
+
+#wall{display:flex; gap:8px; align-items:flex-start}
+.col{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px}
+.tile{display:block; width:100%; max-width:100%; padding:0; border:0; border-radius:5px; overflow:hidden; background:var(--tile); cursor:zoom-in; position:relative}
+.tile img{display:block; width:100%; height:100%; object-fit:cover; transition:filter .2s, transform .35s}
+.tile:hover img{filter:brightness(.9); transform:scale(1.02)}
+.tile.broken::after{content:"image missing"; position:absolute; inset:0; display:grid; place-items:center; font-family:var(--mono); font-size:10px; color:var(--muted)}
+.tile.txt{aspect-ratio:1; background:var(--surface); border:1px solid var(--line); text-align:left; padding:10px 10px 9px; display:flex; flex-direction:column; gap:5px; cursor:pointer; transition:border-color .15s}
+.tile.txt:hover{border-color:var(--muted)}
+.t-title{font-family:var(--display); font-weight:600; font-size:13.5px; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; flex:none}
+.t-body{font-size:11.5px; line-height:1.55; color:var(--muted); flex:1; min-height:0; overflow:hidden; white-space:pre-line;
+  -webkit-mask-image:linear-gradient(to bottom, #000 55%, transparent); mask-image:linear-gradient(to bottom, #000 55%, transparent)}
+.t-foot{font-family:var(--mono); font-size:10.5px; letter-spacing:.02em; color:var(--accent); flex:none}
+
+.empty{border:1px dashed var(--line); background:var(--surface); border-radius:8px; padding:44px 20px; text-align:center; color:var(--muted)}
+.empty strong{display:block; font-family:var(--display); font-weight:600; font-size:17px; color:var(--ink); margin-bottom:6px}
+.empty p{margin:0 auto; max-width:48ch}
+
+.overlay{position:fixed; inset:0; z-index:50; background:var(--scrim); display:flex; align-items:center; justify-content:center;
+  padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+.icon-btn{position:absolute; width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:transparent; color:var(--on-scrim); font-size:20px; line-height:1; cursor:pointer; display:grid; place-items:center}
+.icon-btn:hover{background:rgba(255,255,255,.08)}
+#v-close{top:calc(12px + env(safe-area-inset-top, 0px)); right:calc(12px + env(safe-area-inset-right, 0px))}
+#v-prev{left:calc(12px + env(safe-area-inset-left, 0px)); top:50%; transform:translateY(-50%)}
+#v-next{right:calc(12px + env(safe-area-inset-right, 0px)); top:50%; transform:translateY(-50%)}
+
+.v-panel{background:var(--surface); border-radius:10px; overflow:hidden; display:flex; max-height:100%; max-width:min(1120px, calc(100% - 96px))}
+.v-panel.is-img .v-media{background:var(--tile); display:flex; align-items:center; justify-content:center; min-width:0}
+.v-panel.is-img .v-media img{display:block; max-width:100%; max-height:calc(100vh - 64px); object-fit:contain}
+.v-info{width:300px; flex:none; padding:22px 20px; overflow-y:auto; display:flex; flex-direction:column; gap:16px; border-left:1px solid var(--line)}
+.v-note{white-space:pre-wrap; margin:0; overflow-wrap:anywhere}
+.v-note.none{color:var(--muted); font-size:13px}
+.label{font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0; color:var(--muted); margin:0 0 4px}
+.src{display:flex; align-items:center; gap:8px; min-width:0}
+.src a{color:var(--accent); text-decoration:none; overflow-wrap:anywhere; font-size:13.5px; min-width:0}
+.src a:hover{text-decoration:underline}
+.date{font-family:var(--mono); font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+.v-actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; padding-top:6px}
+
+.v-panel.is-text{width:min(680px, 100%); flex-direction:column}
+.v-text{display:flex; flex-direction:column; min-height:0; padding:26px 28px 22px; gap:14px}
+.v-text h2{font-family:var(--display); font-weight:600; font-size:21px; line-height:1.25; margin:0; text-wrap:balance}
+.v-body{white-space:pre-wrap; overflow-y:auto; min-height:0; max-height:62vh; font-size:16px; line-height:1.85; overflow-wrap:anywhere; padding-right:6px; max-width:64ch}
+.v-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:14px}
+.v-foot .v-actions{margin-top:0; padding-top:0}
+
+.c-panel{background:var(--surface); border-radius:10px; width:min(520px, 100%); max-height:100%; overflow-y:auto; padding:22px; display:flex; flex-direction:column; gap:14px}
+.c-head{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.c-head h2{font-family:var(--display); font-weight:600; font-size:18px; margin:0}
+.c-sub{margin:-6px 0 0; font-size:13px; color:var(--muted)}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:2px}
+.seg button{border:0; background:transparent; border-radius:999px; padding:4px 13px; font-size:13px; cursor:pointer; color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+.field{display:flex; flex-direction:column; gap:5px}
+.field label{font-size:12.5px; font-weight:500; color:var(--muted)}
+.field input,.field textarea{width:100%; border:1px solid var(--line); background:var(--bg); border-radius:7px; padding:9px 11px; font-size:15px; resize:vertical}
+.field textarea{line-height:1.6}
+.field small{font-size:12px; color:var(--muted)}
+.drop{position:relative; display:flex; align-items:center; justify-content:center; min-height:170px; border:1.5px dashed var(--line); border-radius:8px; background:var(--bg); cursor:pointer; text-align:center; color:var(--muted); font-size:13.5px; padding:16px; overflow:hidden}
+.drop:hover{border-color:var(--muted)}
+.drop img{max-height:260px; max-width:100%; border-radius:4px; display:block}
+.drop.has{padding:10px}
+.drop .drop-msg strong{display:block; color:var(--ink); font-weight:500; font-size:14.5px; margin-bottom:3px}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.c-foot{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap}
+.c-status{margin-right:auto; font-size:13px; color:var(--accent)}
+
+#dropzone{pointer-events:none}
+#dropzone div{border:2px dashed var(--on-scrim); border-radius:14px; padding:40px 56px; color:var(--on-scrim); font-weight:600; font-size:20px}
+#toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:8px 16px; border-radius:999px; font-size:13.5px; z-index:80; max-width:calc(100% - 32px); text-align:center}
+
+@media (max-width:560px){
+  .chips{flex-wrap:nowrap; overflow-x:auto; gap:4px; scrollbar-width:none; padding:4px 0 6px; width:100%}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none; font-size:11px; padding:4px 8px 5px}
+  .chip span{display:none}
+  .bar{padding-top:3px}
+  .eyebrow{font-size:11px} .eyebrow b{font-size:12px}
+}
+@media (max-width:760px){
+  .v-panel{max-width:100%; width:100%}
+  .v-panel.is-img{flex-direction:column; overflow-y:auto}
+  .v-panel.is-img .v-media img{max-height:62vh}
+  .v-info{width:auto; border-left:0; border-top:1px solid var(--line); overflow:visible}
+  #v-prev,#v-next{display:none}
+  .v-text{padding:22px 18px 18px}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion: reduce){ .tile img{transition:none} .tile:hover img{transform:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1 class="eyebrow"><b>沖田総悟</b>&nbsp; アーカイブ <span class="heart" aria-hidden="true">♡</span></h1>
+      <button class="btn primary" id="add-btn" type="button" hidden>+ Add</button>
+    </div>
+    <div class="meta">
+      <span class="count" id="count"></span>
+      <button class="linkish" id="login-btn" type="button">Owner login</button>
+      <button class="linkish" id="logout-btn" type="button" hidden>Log out</button>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="chips" id="chips" role="group" aria-label="Show"></div>
+    <div class="bar-right">
+      <button class="tag" id="tagpill" type="button" hidden aria-label="Clear tag filter"></button>
+      <input class="search" id="q" type="search" placeholder="Search tags, notes…" aria-label="Search" autocomplete="off">
+      <button class="linkish" id="y-lockbtn" type="button" hidden>Lock ♡</button>
+    </div>
+  </div>
+
+  <div id="wall" aria-live="polite"></div>
+  <div class="empty" id="empty" hidden></div>
+</div>
+
+<!-- viewer -->
+<div class="overlay" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Viewer">
+  <button class="icon-btn" id="v-close" type="button" aria-label="Close">×</button>
+  <button class="icon-btn" id="v-prev" type="button" aria-label="Previous">‹</button>
+  <button class="icon-btn" id="v-next" type="button" aria-label="Next">›</button>
+  <div class="v-panel" id="v-panel"></div>
+</div>
+
+<!-- add / edit -->
+<div class="overlay" id="composer" hidden role="dialog" aria-modal="true" aria-labelledby="c-title-h">
+  <form class="c-panel" id="c-form" novalidate>
+    <div class="c-head">
+      <h2 id="c-title-h">Add to the archive</h2>
+      <div class="seg" id="c-seg" role="group" aria-label="Entry type">
+        <button type="button" data-mode="image" aria-pressed="true">Image</button>
+        <button type="button" data-mode="text" aria-pressed="false">Text</button>
+        <button type="button" data-mode="post" aria-pressed="false">Post</button>
+      </div>
+    </div>
+    <div id="c-image-sec">
+      <label class="drop" id="c-drop" for="c-file" tabindex="0">
+        <span class="drop-msg" id="c-drop-msg"><strong>Paste (Ctrl/⌘+V), drop, or choose an image</strong>PNG, JPG, GIF or WebP, up to 15 MB</span>
+        <img id="c-preview" alt="" hidden>
+      </label>
+      <input type="file" id="c-file" class="sr-only" accept="image/png,image/jpeg,image/gif,image/webp">
+    </div>
+    <div class="field" id="c-cat-field">
+      <label id="c-cat-l">Category</label>
+      <div class="cats" id="c-cats" role="group" aria-labelledby="c-cat-l">
+        <button type="button" class="chip" data-cat="fanart" aria-pressed="true">Fanart</button>
+        <button type="button" class="chip" data-cat="official" aria-pressed="false">Official</button>
+        <button type="button" class="chip" data-cat="manga" aria-pressed="false">Manga</button>
+      </div>
+    </div>
+    <div class="field" id="c-title-field" hidden>
+      <label for="c-title">Title</label>
+      <input id="c-title" type="text" placeholder="e.g. that one ch. 300 panel" autocomplete="off">
+    </div>
+    <div class="field" id="c-body-field" hidden>
+      <label for="c-body">Text</label>
+      <textarea id="c-body" rows="9" placeholder="Fic excerpt, quote, headcanon, a thread you saved…"></textarea>
+    </div>
+    <div class="field" id="c-post-field" hidden>
+      <label>Post <small>· paste images right where you're writing</small></label>
+      <div id="c-blocks"></div>
+      <div class="pb-add">
+        <button class="btn small" type="button" id="c-add-p">+ Paragraph</button>
+        <label class="btn small" for="c-post-file">+ Image</label>
+        <input type="file" id="c-post-file" class="sr-only" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+      </div>
+    </div>
+    <div class="field">
+      <label for="c-link">Source link</label>
+      <input id="c-link" type="text" inputmode="url" placeholder="https://www.pixiv.net/artworks/…" autocomplete="off">
+    </div>
+    <div class="field" id="c-note-field">
+      <label for="c-note">Note</label>
+      <textarea id="c-note" rows="3" placeholder="Artist name, why you love it, anything"></textarea>
+    </div>
+    <div class="field">
+      <label for="c-tags">Tags</label>
+      <input id="c-tags" type="text" placeholder="chibi, ch. 300, with hijikata" autocomplete="off">
+      <small>Separate tags with commas</small>
+    </div>
+    <div class="c-foot">
+      <span class="c-status" id="c-status" role="status"></span>
+      <button class="btn" type="button" id="c-cancel">Cancel</button>
+      <button class="btn primary" type="submit" id="c-save">Save</button>
+    </div>
+  </form>
+</div>
+
+<!-- login -->
+<div class="overlay" id="login" hidden role="dialog" aria-modal="true" aria-labelledby="l-h">
+  <form class="c-panel" id="l-form" novalidate>
+    <div class="c-head"><h2 id="l-h">Owner login</h2></div>
+    <p class="c-sub">Paste the access key you made on GitHub. It stays on this device only.</p>
+    <div class="field">
+      <label for="l-repo">Your repository</label>
+      <input id="l-repo" type="text" placeholder="your-username/sougo-archive" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="l-token">Access key (token)</label>
+      <input id="l-token" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+      <small>Starts with <code>github_pat_</code></small>
+    </div>
+    <div class="c-foot">
+      <span class="c-status" id="l-status" role="status"></span>
+      <button class="btn" type="button" id="l-cancel">Cancel</button>
+      <button class="btn primary" type="submit" id="l-save">Log in</button>
+    </div>
+  </form>
+</div>
+
+<!-- yume lock -->
+<div class="overlay" id="ylock" hidden role="dialog" aria-modal="true" aria-labelledby="y-h">
+  <form class="c-panel" id="y-form" novalidate>
+    <div class="c-head"><h2 id="y-h">Locked ♡</h2></div>
+    <p class="c-sub" id="y-sub"></p>
+    <div class="field" id="y-f1">
+      <label for="y-pass">Passcode</label>
+      <input id="y-pass" type="password" autocomplete="off">
+    </div>
+    <div class="field" id="y-f2" hidden>
+      <label for="y-pass2">Type it again</label>
+      <input id="y-pass2" type="password" autocomplete="off">
+    </div>
+    <p class="warn" id="y-warn" hidden>Write this passcode down somewhere safe. If you forget it, nobody can open your yume space again, not even with your GitHub key.</p>
+    <label class="check" id="y-remember-wrap"><input type="checkbox" id="y-remember"> Stay unlocked on this device</label>
+    <div class="c-foot">
+      <span class="c-status" id="y-status" role="status"></span>
+      <button class="btn" type="button" id="y-cancel">Cancel</button>
+      <button class="btn primary" type="submit" id="y-ok">Unlock</button>
+    </div>
+  </form>
+</div>
+
+<div class="overlay" id="dropzone" hidden><div>Drop to add</div></div>
+<div id="toast" hidden role="status"></div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const DATA = 'data/entries.json';
+  const YDATA = 'data/yume.json';
+  const OK_TYPES = {'image/png':'png','image/jpeg':'jpg','image/gif':'gif','image/webp':'webp'};
+  const MAX = 15*1024*1024;
+  const CATS = {fanart:'Fanart', official:'Official', manga:'Manga'};
+  const FILTERS = [['all','All'],['fanart','Fanart'],['official','Official'],['manga','Manga'],['text','Text'],['posts','Posts'],['yume','♡']];
+  const LOCK_SVG = '<svg class="lock" viewBox="0 0 10 11" aria-hidden="true"><rect x="1" y="4.5" width="8" height="6" rx="1.4" fill="currentColor"/><path d="M3 4.6V3.2a2 2 0 0 1 4 0v1.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>';
+  const S = { entries:[], yume:null, ykey:null, filter:'all', tag:'', q:'', ready:false, loadError:false, owner:'', repo:'', token:'',
+              vid:null, editing:null, mode:'image', cat:'fanart', file:null, fileUrl:null, localUrls:{}, ymode:'unlock', ydoc:null,
+              blocks:[], blockFocus:-1 };
+
+  /* ---------- small helpers ---------- */
+  const store = {
+    get(k){ try{ return localStorage.getItem(k) || ''; }catch(_){ return ''; } },
+    set(k,v){ try{ localStorage.setItem(k,v); }catch(_){} },
+    del(k){ try{ localStorage.removeItem(k); }catch(_){} }
+  };
+  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+  const inYume = () => S.filter==='yume';
+  const catOf = e => (e.cat==='ss' || e.cat==='illust') ? 'official' : (CATS[e.cat] ? e.cat : 'fanart');
+  const coverOf = e => e.kind==='post' ? (e.blocks||[]).find(b=>b.t==='img' && b.path) : null;
+  const imgRef = (e, b) => ({path:b.path, mime:b.mime, enc:!!e.enc});
+  function listFor(f){
+    if(f==='yume') return S.yume || [];
+    if(f==='all') return S.entries;
+    if(f==='text') return S.entries.filter(e=>e.kind==='text');
+    if(f==='posts') return S.entries.filter(e=>e.kind==='post');
+    return S.entries.filter(e=>e.kind==='image' && catOf(e)===f);
+  }
+  function hay(e){
+    const parts=[e.title,e.body,e.note,e.link,(e.tags||[]).join(' ')];
+    (e.blocks||[]).forEach(b=>{ if(b.t==='p') parts.push(b.text); });
+    return parts.filter(Boolean).join(' ').toLowerCase();
+  }
+  function matches(e){
+    if(S.tag && !(e.tags||[]).includes(S.tag)) return false;
+    if(S.q){ const h=hay(e); return S.q.split(/\s+/).every(w=>h.includes(w)); }
+    return true;
+  }
+  const visible = () => listFor(S.filter).filter(matches);
+  function ratioOf(e){
+    if(e.kind==='post') return coverOf(e) ? 1.25 : 1;
+    if(e.kind!=='image') return 1;
+    const r=(e.w&&e.h)? e.h/e.w : 1.25; return Math.min(2.4, Math.max(0.45, r));
+  }
+  function fmtDate(ms){ if(!ms) return ''; try{ return new Date(ms).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(_){ return ''; } }
+  function normLink(s){ s=(s||'').trim(); if(!s) return ''; if(!/^https?:\/\//i.test(s)){ if(/^[a-z][a-z0-9+.-]*:/i.test(s)) return ''; s='https://'+s; } return s; }
+  function prettyLink(u){ try{ const x=new URL(u); const p=x.hostname.replace(/^www\./,'')+(x.pathname==='/'?'':x.pathname); return p.length>46? p.slice(0,45)+'…' : p; }catch(_){ return u; } }
+  function parseTags(s){ const out=[]; (s||'').split(',').forEach(t=>{ t=t.trim().toLowerCase().replace(/^#+/,'').replace(/\s+/g,' '); if(t && !out.includes(t) && out.length<20) out.push(t.slice(0,40)); }); return out; }
+  function sortEntries(list){ return (list||[]).filter(e=>e && e.id && e.kind).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)); }
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  let toastT;
+  function toast(msg, ms){ const t=$('#toast'); t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>{t.hidden=true}, ms||2800); }
+
+  function bytesToB64(bytes){ let bin=''; for(let i=0;i<bytes.length;i+=0x8000) bin+=String.fromCharCode.apply(null, bytes.subarray(i,i+0x8000)); return btoa(bin); }
+  function b64ToBytes(b64){ const bin=atob((b64||'').replace(/\s/g,'')); const out=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i); return out; }
+  const b64encText = str => bytesToB64(new TextEncoder().encode(str));
+  const b64decText = b64 => new TextDecoder().decode(b64ToBytes(b64));
+  function fileToB64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(',')[1]||''); r.onerror=()=>rej(r.error); r.readAsDataURL(file); }); }
+  function checkFile(f){
+    if(!OK_TYPES[f.type]) return "That format can't be saved. Use PNG, JPG, GIF or WebP.";
+    if(f.size>MAX) return 'That image is over 15 MB.';
+    return '';
+  }
+
+  /* ---------- locked space: encryption ---------- */
+  async function deriveKey(pass, saltB64){
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2', salt:b64ToBytes(saltB64), iterations:310000, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, true, ['encrypt','decrypt']);
+  }
+  async function encBytes(key, bytes){
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, bytes));
+    const out = new Uint8Array(12 + ct.length); out.set(iv); out.set(ct, 12); return out;
+  }
+  async function decBytes(key, bytes){ return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM', iv:bytes.slice(0,12)}, key, bytes.slice(12))); }
+  async function decList(key, doc){ return JSON.parse(new TextDecoder().decode(await decBytes(key, b64ToBytes(doc.data)))); }
+  async function encList(key, list){ return bytesToB64(await encBytes(key, new TextEncoder().encode(JSON.stringify(list)))); }
+
+  /* ---------- where the site lives ---------- */
+  function detectRepo(){
+    const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if(!m) return null;
+    const owner = m[1];
+    const first = location.pathname.split('/').filter(Boolean)[0];
+    const repo = first && !/\.html?$/i.test(first) ? first : owner + '.github.io';
+    return {owner, repo};
+  }
+  function rawUrl(path){ return S.owner && S.repo ? `https://raw.githubusercontent.com/${S.owner}/${S.repo}/HEAD/${path}` : ''; }
+
+  const yUrls = new Map();
+  function yumeUrl(e){
+    if(S.localUrls[e.path]) return Promise.resolve(S.localUrls[e.path]);
+    if(!S.ykey) return Promise.reject(new Error('locked'));
+    if(!yUrls.has(e.path)){
+      yUrls.set(e.path, (async () => {
+        let r = await fetch(e.path, {cache:'force-cache'}).catch(()=>null);
+        if(!r || !r.ok){ const raw=rawUrl(e.path); r = raw ? await fetch(raw).catch(()=>null) : null; }
+        if(!r || !r.ok) throw new Error('missing');
+        const plain = await decBytes(S.ykey, new Uint8Array(await r.arrayBuffer()));
+        return URL.createObjectURL(new Blob([plain], {type:e.mime||'image/png'}));
+      })());
+      yUrls.get(e.path).catch(()=>yUrls.delete(e.path));
+    }
+    return yUrls.get(e.path);
+  }
+  function setImg(img, e, onFail){
+    if(e.enc){ yumeUrl(e).then(u=>{ img.src=u; }, ()=>{ if(onFail) onFail(); }); return; }
+    let triedRaw=false;
+    img.onerror = () => { const r=rawUrl(e.path); if(!triedRaw && r){ triedRaw=true; img.src=r; } else if(onFail) onFail(); };
+    img.src = S.localUrls[e.path] || e.path;
+  }
+
+  /* ---------- GitHub ---------- */
+  function encPath(p){ return p.split('/').map(encodeURIComponent).join('/'); }
+  async function gh(method, path, body, accept){
+    const r = await fetch(`https://api.github.com/repos/${S.owner}/${S.repo}${path?'/'+path:''}`, {
+      method, cache:'no-store',
+      headers: Object.assign({'Authorization':'Bearer '+S.token,'Accept':accept||'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}, body?{'Content-Type':'application/json'}:{}),
+      body: body ? JSON.stringify(body) : undefined
+    });
+    if(!r.ok){ const e=new Error('GitHub '+r.status); e.status=r.status; try{ e.info=await r.json(); }catch(_){} throw e; }
+    if(r.status===204) return null;
+    return accept && accept.includes('raw') ? r.text() : r.json();
+  }
+  async function readJsonApi(path){
+    try{
+      const j = await gh('GET','contents/'+encPath(path));
+      let text = j.content ? b64decText(j.content) : '';
+      if(!text) text = await gh('GET','contents/'+encPath(path), null, 'application/vnd.github.raw+json');
+      return {json: JSON.parse(text||'null'), sha:j.sha};
+    }catch(e){ if(e.status===404) return {json:null, sha:null}; throw e; }
+  }
+  async function readJsonPublic(path){
+    const r = await fetch(path + '?t=' + Date.now(), {cache:'no-store'});
+    if(r.status===404) return null;
+    if(!r.ok){ const e=new Error('load'); e.status=r.status; throw e; }
+    return r.json();
+  }
+  async function putFile(path, contentB64, message, sha){
+    return gh('PUT','contents/'+encPath(path), Object.assign({message, content:contentB64}, sha?{sha}:{}));
+  }
+  async function mutateMain(fn, message){
+    for(let attempt=0; attempt<2; attempt++){
+      const {json, sha} = await readJsonApi(DATA);
+      const next = sortEntries(fn(Array.isArray(json)?json.slice():[]));
+      try{ await putFile(DATA, b64encText(JSON.stringify(next,null,1)+'\n'), message, sha); S.entries=next; afterChange(); return; }
+      catch(e){ if((e.status===409||e.status===422) && attempt===0) continue; throw e; }
+    }
+  }
+  async function mutateYume(fn){
+    for(let attempt=0; attempt<2; attempt++){
+      const {json:doc, sha} = await readJsonApi(YDATA);
+      if(!doc) throw {code:'Your locked space was not found on GitHub. Lock it and set it up again.'};
+      const next = sortEntries(fn((await decList(S.ykey, doc)).slice()));
+      const body = JSON.stringify({v:1, salt:doc.salt, data: await encList(S.ykey, next)}) + '\n';
+      try{ await putFile(YDATA, b64encText(body), 'Update locked entries', sha); S.yume=next.map(e=>Object.assign(e,{enc:true})); afterChange(); return; }
+      catch(e){ if((e.status===409||e.status===422) && attempt===0) continue; throw e; }
+    }
+  }
+  const mutate = (fn, message) => inYume() ? mutateYume(fn) : mutateMain(fn, message);
+  function afterChange(){ render(); if(S.vid) drawViewer(); }
+
+  async function uploadImage(file){
+    const day = new Date().toISOString().slice(0,10);
+    if(inYume()){
+      const path = `yume/${day}-${uid()}.bin`;
+      const enc = await encBytes(S.ykey, new Uint8Array(await file.arrayBuffer()));
+      await putFile(path, bytesToB64(enc), 'Add locked file');
+      return path;
+    }
+    const path = `images/${day}-${uid()}.${OK_TYPES[file.type]}`;
+    await putFile(path, await fileToB64(file), 'Add image');
+    return path;
+  }
+  async function deleteFile(path){
+    try{ const j = await gh('GET','contents/'+encPath(path)); await gh('DELETE','contents/'+encPath(path), {message:'Remove file', sha:j.sha}); }catch(_){}
+  }
+  function filesOf(e){
+    if(e.kind==='image') return e.path ? [e.path] : [];
+    if(e.kind==='post') return (e.blocks||[]).filter(b=>b.t==='img' && b.path).map(b=>b.path);
+    return [];
+  }
+  function ghError(err){
+    const s = err && err.status;
+    if(err && err.code) return err.code;
+    if(s===401) return 'GitHub rejected the key. It may have expired. Log out and log in with a new one.';
+    if(s===403) return "Your key isn't allowed to change this repository. Check it has Contents: Read and write.";
+    if(s===404) return "Couldn't find the repository with this key.";
+    if(s===413 || s===422) return 'GitHub refused that file. Try a smaller image.';
+    if(!navigator.onLine) return "You're offline. Connect and try again.";
+    return "Couldn't save to GitHub. Try again.";
+  }
+
+  /* ---------- loading ---------- */
+  async function load(){
+    try{
+      const json = S.token ? (await readJsonApi(DATA)).json : await readJsonPublic(DATA);
+      S.entries = sortEntries(Array.isArray(json) ? json : []);
+      S.loadError = false;
+    }catch(e){
+      S.loadError = true;
+      if(S.token && e.status===401) toast(ghError(e), 5000);
+    }
+    S.ready = true; render();
+  }
+  async function fetchYumeDoc(){
+    return S.token ? (await readJsonApi(YDATA)).json : await readJsonPublic(YDATA);
+  }
+
+  /* ---------- chips, search, tags ---------- */
+  const chipEls = {};
+  FILTERS.forEach(([f,label]) => {
+    const b = el('button','chip'); b.type='button'; b.dataset.filter=f; b.setAttribute('aria-pressed', String(f==='all'));
+    if(f==='yume'){ b.classList.add('heart-chip'); b.setAttribute('aria-label','Yume (locked)'); }
+    b.addEventListener('click', () => chooseFilter(f));
+    $('#chips').appendChild(b); chipEls[f]=b;
+  });
+  function chooseFilter(f){
+    if(f==='yume' && !S.yume){ openYumeLock(); return; }
+    S.filter = f; render();
+  }
+  function renderChips(){
+    FILTERS.forEach(([f,label]) => {
+      const b = chipEls[f]; b.setAttribute('aria-pressed', String(S.filter===f));
+      if(f==='yume'){ b.innerHTML = S.yume ? '♡<span>'+S.yume.length+'</span>' : '♡' + LOCK_SVG; }
+      else { b.textContent = label; b.appendChild(el('span',null,String(listFor(f).length))); }
+    });
+    const tp=$('#tagpill');
+    tp.hidden = !S.tag; tp.textContent = S.tag ? '#'+S.tag+'  ×' : '';
+  }
+  function setTag(t){ S.tag=t; render(); window.scrollTo({top:0, behavior:'smooth'}); }
+  $('#tagpill').onclick = () => setTag('');
+  let qT;
+  $('#q').addEventListener('input', ev => { clearTimeout(qT); qT=setTimeout(()=>{ S.q=ev.target.value.trim().toLowerCase(); render(); },120); });
+  $('#q').addEventListener('keydown', ev => { if(ev.key==='Escape' && ev.target.value){ ev.stopPropagation(); ev.target.value=''; S.q=''; render(); } });
+
+  /* ---------- wall ---------- */
+  const tileCache = new Map();
+  function tileFor(e){
+    const cover = coverOf(e);
+    const key=[e.id,e.kind,e.cat||'',e.path||'',e.w||'',e.h||'',e.title||'',(e.body||'').slice(0,240),cover?cover.path:'',(e.blocks||[]).length,e.createdAt||'',S.localUrls[e.path]?1:0].join('|');
+    const hit=tileCache.get(e.id); if(hit && hit.key===key) return hit.node;
+    const b=el('button','tile'); b.type='button'; b.dataset.id=e.id;
+    if(e.kind==='image'){
+      b.style.aspectRatio=(1/ratioOf(e)).toFixed(4);
+      b.setAttribute('aria-label', e.note ? 'Open: '+e.note.slice(0,60) : 'Open image');
+      const img=el('img'); img.loading='lazy'; img.decoding='async'; img.alt='';
+      setImg(img, e, () => b.classList.add('broken'));
+      b.appendChild(img);
+    } else if(e.kind==='post' && cover){
+      b.classList.add('post'); b.style.aspectRatio='4/5';
+      b.setAttribute('aria-label','Open post: '+(e.title||'Untitled'));
+      const img=el('img'); img.loading='lazy'; img.decoding='async'; img.alt='';
+      setImg(img, imgRef(e,cover), () => b.classList.add('broken'));
+      const cap=el('span','p-cap'); cap.append(el('span','p-kind', e.enc?'♡ POST':'POST'), el('span','p-title', e.title||'Untitled'));
+      b.append(img, cap);
+    } else {
+      b.classList.add('txt');
+      const isPost = e.kind==='post';
+      const excerpt = isPost ? (e.blocks||[]).filter(x=>x.t==='p').map(x=>x.text).join('\n') : (e.body||'');
+      b.setAttribute('aria-label',(isPost?'Open post: ':'Open text: ')+(e.title||'Untitled'));
+      b.append(el('span','t-title',e.title||'Untitled'), el('span','t-body',excerpt),
+        el('span','t-foot',(e.enc?'♡ · ':(isPost?'POST · ':'TEXT · '))+fmtDate(e.createdAt).toUpperCase()));
+    }
+    tileCache.set(e.id,{key,node:b}); return b;
+  }
+
+  let lastW=0;
+  function render(){
+    renderChips();
+    const n=S.entries.length;
+    $('#count').textContent = S.ready ? n+(n===1?' piece':' pieces') : '';
+    const editing = !!S.token;
+    $('#add-btn').hidden=!editing; $('#logout-btn').hidden=!editing; $('#login-btn').hidden=editing;
+    $('#y-lockbtn').hidden = !inYume();
+
+    const wall=$('#wall'), empty=$('#empty'), list=visible();
+    wall.textContent=''; empty.textContent='';
+    if(!S.ready){ empty.hidden=false; empty.appendChild(el('p',null,'Opening the archive…')); return; }
+    if(!list.length){
+      empty.hidden=false;
+      if(S.tag || S.q){ empty.appendChild(el('strong',null,'No matches')); empty.appendChild(el('p',null, S.tag ? 'Nothing here is tagged #'+S.tag+'.' : 'Nothing matches that search.')); }
+      else if(inYume()){
+        empty.appendChild(el('strong',null,'Your yume space is empty ♡'));
+        empty.appendChild(el('p',null, editing ? 'Paste or drop anything here to add it. Everything in this space is encrypted before it is saved, so only your passcode can open it.' : 'Nothing saved here yet.'));
+      }
+      else if(S.loadError && !n){ empty.appendChild(el('strong',null,"Couldn't load the archive")); empty.appendChild(el('p',null,'Check your connection and reload the page.')); }
+      else if(n){ empty.appendChild(el('strong',null,'Nothing here yet')); empty.appendChild(el('p',null,'Nothing saved in this category so far.')); }
+      else if(editing){ empty.appendChild(el('strong',null,'Your archive is empty')); empty.appendChild(el('p',null,'Copy an image and paste it here, drop a file onto the page, or press Add. Everything is saved into your GitHub repository.')); }
+      else { empty.appendChild(el('strong',null,'Nothing saved yet')); empty.appendChild(el('p',null,'If this is your archive, use Owner login at the top to start adding.')); }
+      return;
+    }
+    empty.hidden=true;
+    const W=wall.clientWidth||800; lastW=W;
+    const gap=8, target=W<520?100:128;
+    const cols=Math.max(3, Math.floor((W+gap)/(target+gap)));
+    const colW=(W-gap*(cols-1))/cols;
+    const colEls=[], hs=[];
+    for(let i=0;i<cols;i++){ const c=el('div','col'); wall.appendChild(c); colEls.push(c); hs.push(0); }
+    list.forEach(e=>{ let k=0; for(let i=1;i<cols;i++) if(hs[i]<hs[k]-1) k=i; hs[k]+=colW*ratioOf(e)+gap; colEls[k].appendChild(tileFor(e)); });
+  }
+  $('#wall').addEventListener('click', ev=>{ const t=ev.target.closest('.tile'); if(t) openViewer(t.dataset.id); });
+  new ResizeObserver(()=>{ const w=$('#wall').clientWidth; if(Math.abs(w-lastW)>2 && S.ready) render(); }).observe($('#wall'));
+
+  /* ---------- viewer ---------- */
+  let lastFocus=null;
+  function lockScroll(on){ document.body.style.overflow = on ? 'hidden' : ''; }
+  function openViewer(id){ lastFocus=document.activeElement; S.vid=id; drawViewer(); $('#viewer').hidden=false; lockScroll(true); $('#v-close').focus(); }
+  function closeViewer(){ $('#viewer').hidden=true; S.vid=null; lockScroll(false); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+  function step(d){ const l=visible(); if(l.length<2) return; let i=l.findIndex(e=>e.id===S.vid); i=(i+d+l.length)%l.length; S.vid=l[i].id; drawViewer(); }
+  function selectText(node){ const r=document.createRange(); r.selectNodeContents(node); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+  function sourceBlock(e){
+    const w=el('div'); w.appendChild(el('p','label','Source'));
+    if(e.link){
+      const row=el('div','src'); const a=el('a',null,prettyLink(e.link)); a.href=e.link; a.target='_blank'; a.rel='noopener noreferrer';
+      const cp=el('button','btn small','Copy'); cp.type='button';
+      cp.onclick=()=>{ const done=()=>{cp.textContent='Copied'; setTimeout(()=>cp.textContent='Copy',1400);}; try{ navigator.clipboard.writeText(e.link).then(done,()=>selectText(a)); }catch(_){ selectText(a); } };
+      row.append(a,cp); w.appendChild(row);
+    } else w.appendChild(el('p','v-note none','No source saved'));
+    return w;
+  }
+  function tagBlock(e, withLabel){
+    const tags=e.tags||[]; if(!tags.length) return null;
+    const w=el('div'); if(withLabel) w.appendChild(el('p','label','Tags'));
+    const row=el('div','tags');
+    tags.forEach(t=>{ const b=el('button','tag','#'+t); b.type='button'; b.onclick=()=>{ closeViewer(); setTag(t); }; row.appendChild(b); });
+    w.appendChild(row); return w;
+  }
+  function actions(e){
+    const box=el('div','v-actions'); if(!S.token) return box;
+    const ed=el('button','btn small','Edit'); ed.type='button'; ed.onclick=()=>{ closeViewer(); openComposer(e); };
+    const del=el('button','btn small','Delete'); del.type='button'; let armed=false, t;
+    del.onclick=()=>{
+      if(!armed){ armed=true; del.textContent='Delete for good?'; del.classList.add('danger'); t=setTimeout(()=>{armed=false; del.textContent='Delete'; del.classList.remove('danger');},4000); return; }
+      clearTimeout(t); del.disabled=true; del.textContent='Deleting…'; doDelete(e).finally(()=>{ del.disabled=false; });
+    };
+    box.append(ed,del); return box;
+  }
+  function drawViewer(){
+    const l=visible(), e=l.find(x=>x.id===S.vid);
+    if(!e){ if(!$('#viewer').hidden) closeViewer(); return; }
+    const p=$('#v-panel'); p.textContent='';
+    p.className='v-panel '+(e.kind==='image'?'is-img':'is-text'+(e.kind==='post'?' is-post':''));
+    const multi=l.length>1; $('#v-prev').hidden=!multi; $('#v-next').hidden=!multi;
+    if(e.kind==='image'){
+      const media=el('div','v-media'); const img=el('img'); img.alt=e.note||'Saved image'; setImg(img,e); media.appendChild(img);
+      const info=el('div','v-info');
+      const tw=el('div'); tw.append(el('p','label','Type'), el('p','v-note', e.enc ? 'Yume ♡' : CATS[catOf(e)]));
+      const nw=el('div'); nw.append(el('p','label','Note'), el('p', e.note?'v-note':'v-note none', e.note||'No note'));
+      const dw=el('div'); dw.append(el('p','label','Added'), el('span','date',fmtDate(e.createdAt)));
+      info.append(tw, nw); const tb=tagBlock(e,true); if(tb) info.appendChild(tb);
+      info.append(sourceBlock(e), dw, actions(e)); p.append(media, info);
+    } else {
+      const art=el('div','v-text');
+      const kind = e.kind==='post' ? 'POST' : 'TEXT';
+      art.append(el('p','eyebrow',(e.enc?'♡ '+kind:kind)+' · '+fmtDate(e.createdAt).toUpperCase()), el('h2',null,e.title||'Untitled'));
+      let body;
+      if(e.kind==='post'){
+        body=el('div','v-body post-body');
+        (e.blocks||[]).forEach(bk=>{
+          if(bk.t==='img' && bk.path){ const im=el('img'); im.alt=''; im.loading='lazy'; if(bk.w&&bk.h) im.style.aspectRatio=bk.w+'/'+bk.h; setImg(im, imgRef(e,bk)); body.appendChild(im); }
+          else if(bk.t==='p' && bk.text) body.appendChild(el('p',null,bk.text));
+        });
+      } else body=el('div','v-body',e.body||'');
+      body.tabIndex=0; art.appendChild(body);
+      const tb=tagBlock(e,false); if(tb) art.appendChild(tb);
+      const foot=el('div','v-foot'); foot.append(sourceBlock(e), actions(e)); art.appendChild(foot);
+      p.appendChild(art);
+    }
+  }
+  $('#v-close').onclick=closeViewer; $('#v-prev').onclick=()=>step(-1); $('#v-next').onclick=()=>step(1);
+  $('#viewer').addEventListener('click', ev=>{ if(ev.target.id==='viewer') closeViewer(); });
+
+  async function doDelete(e){
+    try{
+      await mutate(list=>list.filter(x=>x.id!==e.id), 'Delete entry');
+      for(const f of filesOf(e)) await deleteFile(f);
+      toast('Deleted');
+    }catch(err){ toast(ghError(err), 5000); }
+  }
+
+  /* ---------- composer ---------- */
+  function setMode(m){
+    S.mode=m;
+    document.querySelectorAll('#c-seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));
+    $('#c-image-sec').hidden = m!=='image';
+    $('#c-cat-field').hidden = m!=='image' || inYume();
+    $('#c-note-field').hidden = m!=='image';
+    $('#c-title-field').hidden = m==='image';
+    $('#c-body-field').hidden = m!=='text';
+    $('#c-post-field').hidden = m!=='post';
+    $('#c-title').placeholder = m==='post' ? 'e.g. why ch. 300 lives in my head' : 'e.g. that one ch. 300 panel';
+    if(m==='post' && !S.blocks.length){ S.blocks=[{t:'p',text:''}]; renderBlocks(); }
+  }
+  function setCat(c){ S.cat = CATS[c] ? c : 'fanart'; document.querySelectorAll('#c-cats .chip').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.cat===S.cat))); }
+  function clearFile(){ if(S.fileUrl && !Object.values(S.localUrls).includes(S.fileUrl)) URL.revokeObjectURL(S.fileUrl); S.file=null; S.fileUrl=null; }
+  function showPreview(src){
+    const pv=$('#c-preview'), msg=$('#c-drop-msg');
+    if(src){ pv.src=src; pv.hidden=false; msg.hidden=true; $('#c-drop').classList.add('has'); }
+    else { pv.removeAttribute('src'); pv.hidden=true; msg.hidden=false; $('#c-drop').classList.remove('has'); }
+  }
+  function setFile(f){
+    if(!f) return;
+    const bad=checkFile(f); if(bad){ $('#c-status').textContent=bad; return; }
+    clearFile(); S.file=f; S.fileUrl=URL.createObjectURL(f); showPreview(S.fileUrl); $('#c-status').textContent='';
+  }
+
+  /* post blocks */
+  function autosize(t){ t.style.height='auto'; t.style.height=Math.min(t.scrollHeight+2, 420)+'px'; }
+  function renderBlocks(){
+    const box=$('#c-blocks'); box.textContent='';
+    S.blocks.forEach((b,i)=>{
+      if(b.t==='p'){
+        const t=el('textarea','pb-text'); t.rows=3; t.value=b.text||''; t.placeholder = i===0 ? 'Start writing…' : 'Keep writing…';
+        t.setAttribute('aria-label','Paragraph '+(i+1));
+        t.addEventListener('input',()=>{ b.text=t.value; autosize(t); });
+        t.addEventListener('focus',()=>{ S.blockFocus=i; });
+        box.appendChild(t); requestAnimationFrame(()=>autosize(t));
+      } else {
+        const w=el('div','pb-img'); const im=el('img'); im.alt='';
+        if(b.url) im.src=b.url; else setImg(im, {path:b.path, mime:b.mime, enc:inYume()});
+        const x=el('button','pb-x','×'); x.type='button'; x.setAttribute('aria-label','Remove image');
+        x.onclick=()=>{ S.blocks.splice(i,1); if(!S.blocks.length) S.blocks.push({t:'p',text:''}); S.blockFocus=-1; renderBlocks(); };
+        w.append(im,x); box.appendChild(w);
+      }
+    });
+  }
+  function addPostImage(f){
+    const bad=checkFile(f); if(bad){ $('#c-status').textContent=bad; return; }
+    $('#c-status').textContent='';
+    const blk={t:'img', file:f, url:URL.createObjectURL(f), mime:f.type};
+    let at = S.blockFocus>=0 && S.blockFocus<S.blocks.length ? S.blockFocus+1 : S.blocks.length;
+    const toInsert=[blk];
+    if(at===S.blocks.length) toInsert.push({t:'p',text:''});
+    S.blocks.splice(at,0,...toInsert); S.blockFocus = at+1 < S.blocks.length ? at+1 : -1;
+    renderBlocks();
+  }
+  $('#c-add-p').onclick=()=>{ S.blocks.push({t:'p',text:''}); renderBlocks(); const ts=$('#c-blocks').querySelectorAll('textarea'); ts[ts.length-1].focus(); };
+  $('#c-post-file').addEventListener('change', ev=>{ Array.from(ev.target.files||[]).forEach(addPostImage); ev.target.value=''; });
+
+  function openComposer(entry, mode, file){
+    S.editing=entry||null; clearFile(); showPreview(null); $('#c-status').textContent='';
+    $('#c-link').value=entry?(entry.link||''):'';
+    $('#c-note').value=entry&&entry.kind==='image'?(entry.note||''):'';
+    $('#c-title').value=entry&&entry.kind!=='image'?(entry.title||''):'';
+    $('#c-body').value=entry&&entry.kind==='text'?(entry.body||''):'';
+    $('#c-tags').value=entry ? (entry.tags||[]).join(', ') : (S.tag||'');
+    S.blocks = entry && entry.kind==='post' ? (entry.blocks||[]).map(b=>Object.assign({},b)) : [];
+    if(entry && entry.kind==='post' && !S.blocks.length) S.blocks=[{t:'p',text:''}];
+    S.blockFocus=-1;
+    setCat(entry ? catOf(entry) : (CATS[S.filter] ? S.filter : 'fanart'));
+    setMode(entry?entry.kind:(mode||'image'));
+    renderBlocks();
+    $('#c-seg').hidden=!!entry;
+    $('#c-title-h').textContent = entry ? 'Edit entry' : (inYume() ? 'Add to yume ♡' : 'Add to the archive');
+    if(entry&&entry.kind==='image'){ setImg($('#c-preview'), entry); $('#c-preview').hidden=false; $('#c-drop-msg').hidden=true; $('#c-drop').classList.add('has'); }
+    if(file){ if(S.mode==='post') addPostImage(file); else setFile(file); }
+    $('#composer').hidden=false; lockScroll(true);
+    setTimeout(()=>(S.mode!=='image'?$('#c-title'):(S.file||entry?$('#c-link'):$('#c-drop'))).focus(),30);
+  }
+  function closeComposer(){
+    $('#composer').hidden=true; lockScroll(false); clearFile(); S.editing=null;
+    S.blocks.forEach(b=>{ if(b.file && b.url && !Object.values(S.localUrls).includes(b.url)) URL.revokeObjectURL(b.url); });
+    S.blocks=[];
+  }
+  document.querySelectorAll('#c-seg button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+  document.querySelectorAll('#c-cats .chip').forEach(b=>b.addEventListener('click',()=>setCat(b.dataset.cat)));
+  $('#c-file').addEventListener('change', ev=>{ setFile(ev.target.files[0]); ev.target.value=''; });
+  $('#c-drop').addEventListener('keydown', ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); $('#c-file').click(); } });
+  $('#c-cancel').onclick=closeComposer;
+  $('#composer').addEventListener('mousedown', ev=>{ if(ev.target.id==='composer') closeComposer(); });
+  $('#add-btn').onclick=()=>openComposer(null, S.filter==='text'?'text':(S.filter==='posts'?'post':'image'));
+  function imgDims(src){ return new Promise(res=>{ const i=new Image(); i.onload=()=>res({w:i.naturalWidth||0,h:i.naturalHeight||0}); i.onerror=()=>res({w:0,h:0}); i.src=src; }); }
+
+  $('#c-form').addEventListener('submit', async ev=>{
+    ev.preventDefault();
+    const status=$('#c-status'), save=$('#c-save'), was=S.editing, link=normLink($('#c-link').value), y=inYume();
+    const tags=parseTags($('#c-tags').value);
+    const upsert = (fields, msg) => was
+      ? mutate(l=>l.map(x=>x.id===was.id?Object.assign({},x,fields):x),'Edit entry')
+      : mutate(l=>l.concat([Object.assign({id:uid(), createdAt:Date.now()},fields)]), msg);
+    try{
+      if(S.mode==='image'){
+        const note=$('#c-note').value.trim();
+        if(!S.file && !was){ status.textContent='Add an image first.'; return; }
+        save.disabled=true;
+        const extra = y ? {enc:true} : {cat:S.cat};
+        if(S.file){
+          status.textContent='Uploading…';
+          const dims=await imgDims(S.fileUrl);
+          const path=await uploadImage(S.file);
+          S.localUrls[path]=S.fileUrl;
+          status.textContent='Saving…';
+          await upsert(Object.assign({kind:'image', path, w:dims.w, h:dims.h, link, note, tags}, extra, y?{mime:S.file.type}:{}), 'Add '+(CATS[S.cat]||'image').toLowerCase());
+          if(was && was.path && was.path!==path) deleteFile(was.path);
+        } else {
+          status.textContent='Saving…';
+          await upsert(Object.assign({link, note, tags}, extra), 'Edit entry');
+        }
+      } else if(S.mode==='text'){
+        const title=$('#c-title').value.trim(), body=$('#c-body').value.replace(/\s+$/,'');
+        if(!title && !body.trim()){ status.textContent='Write something first.'; return; }
+        save.disabled=true; status.textContent='Saving…';
+        await upsert(Object.assign({kind:'text', title, body, link, tags}, y?{enc:true}:{}), 'Add text');
+      } else {
+        const title=$('#c-title').value.trim();
+        const hasContent = S.blocks.some(b=>b.t==='img' || (b.text||'').trim());
+        if(!title && !hasContent){ status.textContent='Write something first.'; return; }
+        save.disabled=true;
+        const pending=S.blocks.filter(b=>b.t==='img' && b.file);
+        for(let i=0;i<pending.length;i++){
+          const b=pending[i];
+          status.textContent = pending.length>1 ? `Uploading image ${i+1} of ${pending.length}…` : 'Uploading…';
+          const dims=await imgDims(b.url);
+          b.path=await uploadImage(b.file); b.w=dims.w; b.h=dims.h; S.localUrls[b.path]=b.url; delete b.file;
+        }
+        status.textContent='Saving…';
+        const blocks=S.blocks
+          .filter(b=>b.t==='img' ? !!b.path : !!(b.text||'').trim())
+          .map(b=>b.t==='img' ? Object.assign({t:'img', path:b.path, w:b.w||0, h:b.h||0}, y?{mime:b.mime}:{}) : {t:'p', text:b.text.replace(/\s+$/,'')});
+        await upsert(Object.assign({kind:'post', title, blocks, link, tags}, y?{enc:true}:{}), 'Add post');
+        if(was){ const keep=new Set(blocks.filter(b=>b.t==='img').map(b=>b.path)); filesOf(was).filter(f=>!keep.has(f)).forEach(deleteFile); }
+      }
+      S.file=null; S.fileUrl=null;
+      closeComposer();
+      toast(was ? 'Changes saved' : (y ? 'Saved to yume ♡' : 'Saved. Visitors will see it in about a minute.'));
+    }catch(err){ status.textContent=ghError(err); }
+    finally{ save.disabled=false; }
+  });
+
+  /* ---------- paste & drop ---------- */
+  function images(list){ return Array.from(list||[]).filter(f=>f&&f.type&&f.type.startsWith('image/')); }
+  const modalOpen = () => !$('#login').hidden || !$('#ylock').hidden;
+  function takeFiles(fs){
+    if(modalOpen() || !fs.length) return;
+    if($('#composer').hidden){
+      if(!$('#viewer').hidden) closeViewer();
+      if(S.filter==='posts'){ openComposer(null,'post'); fs.forEach(addPostImage); }
+      else openComposer(null,'image',fs[0]);
+    }
+    else if(S.mode==='post') fs.forEach(addPostImage);
+    else { setMode('image'); setFile(fs[0]); }
+  }
+  document.addEventListener('paste', ev=>{
+    if(!S.token) return;
+    const fs=images(ev.clipboardData&&ev.clipboardData.files); if(!fs.length) return;
+    ev.preventDefault(); takeFiles(fs);
+  });
+  let dragDepth=0;
+  const hasFiles=ev=>ev.dataTransfer && Array.from(ev.dataTransfer.types||[]).includes('Files');
+  window.addEventListener('dragenter', ev=>{ if(!hasFiles(ev)||!S.token) return; ev.preventDefault(); dragDepth++; $('#dropzone').hidden=false; });
+  window.addEventListener('dragover', ev=>{ if(hasFiles(ev)) ev.preventDefault(); });
+  window.addEventListener('dragleave', ()=>{ dragDepth=Math.max(0,dragDepth-1); if(!dragDepth) $('#dropzone').hidden=true; });
+  window.addEventListener('drop', ev=>{
+    if(!hasFiles(ev)) return; ev.preventDefault(); dragDepth=0; $('#dropzone').hidden=true;
+    if(!S.token) return;
+    const fs=images(ev.dataTransfer.files); if(!fs.length){ toast('Drop an image file (PNG, JPG, GIF or WebP).'); return; }
+    takeFiles(fs);
+  });
+
+  /* ---------- owner login ---------- */
+  function openLogin(){
+    $('#l-repo').value = S.owner && S.repo ? S.owner+'/'+S.repo : '';
+    $('#l-token').value=''; $('#l-status').textContent='';
+    $('#login').hidden=false; lockScroll(true);
+    setTimeout(()=>($('#l-repo').value?$('#l-token'):$('#l-repo')).focus(),30);
+  }
+  function closeLogin(){ $('#login').hidden=true; lockScroll(false); }
+  $('#login-btn').onclick=openLogin;
+  $('#l-cancel').onclick=closeLogin;
+  $('#login').addEventListener('mousedown', ev=>{ if(ev.target.id==='login') closeLogin(); });
+  $('#logout-btn').onclick=()=>{ S.token=''; store.del('sa.token'); render(); toast('Logged out on this device'); };
+  $('#l-form').addEventListener('submit', async ev=>{
+    ev.preventDefault();
+    const status=$('#l-status'), btn=$('#l-save');
+    const repoTxt=$('#l-repo').value.trim().replace(/^https?:\/\/github\.com\//i,'').replace(/\/+$/,'');
+    const token=$('#l-token').value.trim();
+    const parts=repoTxt.split('/');
+    if(parts.length!==2 || !parts[0] || !parts[1]){ status.textContent='Write it as your-username/repository-name.'; return; }
+    if(!token){ status.textContent='Paste your access key.'; return; }
+    const prev={owner:S.owner, repo:S.repo, token:S.token};
+    S.owner=parts[0]; S.repo=parts[1]; S.token=token;
+    btn.disabled=true; status.textContent='Checking…';
+    try{
+      const info=await gh('GET','');
+      if(info.permissions && info.permissions.push===false) throw {code:"This key can only read the repository. Give it Contents: Read and write."};
+      store.set('sa.token',token); store.set('sa.repo',S.owner+'/'+S.repo);
+      closeLogin(); toast("You're in. Paste or drop an image to add it.", 3500);
+      S.ready=false; render(); await load();
+    }catch(err){
+      S.owner=prev.owner; S.repo=prev.repo; S.token=prev.token;
+      status.textContent = err.status===401 ? "That key didn't work. Make sure you copied all of it."
+        : err.status===404 ? "Can't find that repository with this key. Check the name and that the key has access to it."
+        : ghError(err);
+    }finally{ btn.disabled=false; }
+  });
+
+  /* ---------- yume lock ---------- */
+  function setYumeMode(m){
+    S.ymode=m;
+    const setup = m==='setup', none = m==='none';
+    $('#y-h').textContent = setup ? 'Set up your yume space ♡' : (none ? 'Yume ♡' : 'Locked ♡');
+    $('#y-sub').textContent = setup ? 'Pick a passcode. Everything you put here gets encrypted with it, so nobody else can see it, even on GitHub.'
+      : none ? 'Nothing here yet.' : 'Enter your passcode to open your yume space.';
+    $('#y-f1').hidden = none; $('#y-f2').hidden = !setup; $('#y-warn').hidden = !setup; $('#y-remember-wrap').hidden = none;
+    $('#y-ok').hidden = none; $('#y-ok').textContent = setup ? 'Create' : 'Unlock';
+    $('#y-cancel').textContent = none ? 'Close' : 'Cancel';
+  }
+  async function openYumeLock(){
+    $('#y-pass').value=''; $('#y-pass2').value=''; $('#y-status').textContent='Checking…'; $('#y-remember').checked=false;
+    setYumeMode('unlock'); $('#y-f1').hidden=true; $('#y-ok').hidden=true;
+    $('#ylock').hidden=false; lockScroll(true);
+    try{
+      S.ydoc = await fetchYumeDoc();
+      $('#y-status').textContent='';
+      setYumeMode(S.ydoc ? 'unlock' : (S.token ? 'setup' : 'none'));
+      if(S.ymode!=='none') setTimeout(()=>$('#y-pass').focus(),30);
+    }catch(err){ $('#y-status').textContent = S.token ? ghError(err) : "Couldn't check right now. Try again."; }
+  }
+  function closeYumeLock(){ $('#ylock').hidden=true; lockScroll(false); }
+  $('#y-cancel').onclick=closeYumeLock;
+  $('#ylock').addEventListener('mousedown', ev=>{ if(ev.target.id==='ylock') closeYumeLock(); });
+  async function rememberKey(key, salt){ try{ const raw=new Uint8Array(await crypto.subtle.exportKey('raw', key)); store.set('sa.ykey', bytesToB64(raw)); store.set('sa.ysalt', salt); }catch(_){} }
+  function enterYume(list){ S.yume = sortEntries(list).map(e=>Object.assign(e,{enc:true})); S.filter='yume'; render(); }
+  $('#y-form').addEventListener('submit', async ev=>{
+    ev.preventDefault();
+    const status=$('#y-status'), btn=$('#y-ok'), pass=$('#y-pass').value;
+    if(S.ymode==='none') return closeYumeLock();
+    if(!pass){ status.textContent='Type your passcode.'; return; }
+    btn.disabled=true;
+    try{
+      if(S.ymode==='setup'){
+        if(pass.length<6){ status.textContent='Use at least 6 characters.'; return; }
+        if(pass!==$('#y-pass2').value){ status.textContent="The two passcodes don't match."; return; }
+        status.textContent='Creating…';
+        const salt = bytesToB64(crypto.getRandomValues(new Uint8Array(16)));
+        const key = await deriveKey(pass, salt);
+        const body = JSON.stringify({v:1, salt, data: await encList(key, [])}) + '\n';
+        await putFile(YDATA, b64encText(body), 'Set up locked space');
+        S.ykey=key; if($('#y-remember').checked) await rememberKey(key, salt);
+        closeYumeLock(); enterYume([]); toast('Your yume space is ready ♡');
+      } else {
+        status.textContent='Unlocking…';
+        const key = await deriveKey(pass, S.ydoc.salt);
+        let list;
+        try{ list = await decList(key, S.ydoc); }catch(_){ status.textContent='Wrong passcode.'; return; }
+        S.ykey=key; if($('#y-remember').checked) await rememberKey(key, S.ydoc.salt);
+        closeYumeLock(); enterYume(list);
+      }
+    }catch(err){ status.textContent = ghError(err); }
+    finally{ btn.disabled=false; }
+  });
+  $('#y-lockbtn').onclick=()=>{
+    for(const p of yUrls.values()) p.then(u=>URL.revokeObjectURL(u), ()=>{});
+    yUrls.clear();
+    (S.yume||[]).forEach(e=>tileCache.delete(e.id));
+    S.yume=null; S.ykey=null; store.del('sa.ykey'); store.del('sa.ysalt');
+    S.filter='all'; render(); toast('Locked ♡');
+  };
+  async function tryRemembered(){
+    const raw=store.get('sa.ykey'); if(!raw) return;
+    try{
+      const doc = await fetchYumeDoc(); if(!doc || doc.salt!==store.get('sa.ysalt')) return;
+      const key = await crypto.subtle.importKey('raw', b64ToBytes(raw), {name:'AES-GCM'}, true, ['encrypt','decrypt']);
+      const list = await decList(key, doc);
+      S.ykey=key; S.yume=sortEntries(list).map(e=>Object.assign(e,{enc:true})); render();
+    }catch(_){}
+  }
+
+  document.addEventListener('keydown', ev=>{
+    if(ev.key==='Escape'){
+      if(!$('#ylock').hidden) closeYumeLock(); else if(!$('#login').hidden) closeLogin(); else if(!$('#composer').hidden) closeComposer(); else if(!$('#viewer').hidden) closeViewer();
+      return;
+    }
+    if(!$('#viewer').hidden && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)){
+      if(ev.key==='ArrowLeft') step(-1); if(ev.key==='ArrowRight') step(1);
+    }
+  });
+
+  /* ---------- boot ---------- */
+  const saved=store.get('sa.repo').split('/'); const found=detectRepo();
+  if(found){ S.owner=found.owner; S.repo=found.repo; }
+  else if(saved.length===2){ S.owner=saved[0]; S.repo=saved[1]; }
+  const tok=store.get('sa.token');
+  if(tok && (!found || store.get('sa.repo').toLowerCase()===(S.owner+'/'+S.repo).toLowerCase())) S.token=tok;
+  render(); load().then(tryRemembered);
+})();
+</script>
+</body>
+</html>
